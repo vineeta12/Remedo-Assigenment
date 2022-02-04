@@ -1,0 +1,64 @@
+package Coding.Arrays;
+
+public class BinaryTest {
+    public class Node {
+        int data;
+        Node left;
+        Node right;
+        public Node(int data) {
+            this.data = data;
+            this.left = null;
+            this.right = null;
+        }
+    }
+    // Node class insance variable created
+    public Node root;
+
+    // constructor for initialise the root to null by default
+    public BinaryTest() {
+        this.root = null;
+    }
+
+    // insert method to insert the new number
+    public void insert(int number) {
+        this.root = insert(root, number);
+    }
+    public Node insert(Node root, int number) {
+        //here manageing Base Case root is null or not
+        if (root == null) {
+            root = new Node(number);
+            return root;
+        }
+        // Here checking for root data is greater or equal to number or not
+        else if (root.data >= number) {
+            // if current root data is greater than the new number then now process the left sub-tree
+            root.left = insert(root.left, number);
+        } else {
+            // if current root data is less than the new data then now process the right sub-tree
+            root.right = insert(root.right, number);
+        }
+        return root;
+    }
+    public void preorder() {
+        preorder(root);
+    }
+    //here printng the number in preorder
+    public void preorder(Node root) {
+        if (root == null) {
+            return;
+        }
+        System.out.print(root.data + " ");
+        preorder(root.left);
+        preorder(root.right);
+    }
+    public static void main(String[] args) {
+        BinaryTest binaryTest = new BinaryTest();
+        binaryTest.insert(2);
+        binaryTest.insert(4);
+        binaryTest.insert(1);
+        binaryTest.insert(3);
+        binaryTest.insert(5);
+        binaryTest.preorder();
+    }
+
+}
